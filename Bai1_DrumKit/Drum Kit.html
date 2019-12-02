@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="keys">
+                <div class="key" data-key="65">
+                    <kbd>A</kbd>
+                    <span class="sound">clap</span>
+                </div>
+                <div class="key" data-key="83">
+                    <kbd>S</kbd>
+                    <span class="sound">hihat</span>
+                </div>
+                <div class="key" data-key="68">
+                    <kbd>D</kbd>
+                    <span class="sound">kick</span>
+                </div>
+                <div class="key" data-key="70">
+                    <kbd>F</kbd>
+                    <span class="sound">openhat</span>
+                </div>
+                <div class="key" data-key="71">
+                    <kbd>G</kbd>
+                    <span class="sound">boom</span>
+                </div>
+                <div class="key" data-key="72">
+                    <kbd>H</kbd>
+                    <span class="sound">ride</span>
+                </div>
+                <div class="key" data-key="74">
+                    <kbd>J</kbd>
+                    <span class="sound">snare</span>
+                </div>
+                <div class="key" data-key="75">
+                    <kbd>K</kbd>
+                    <span class="sound">tom</span>
+                </div>
+                <div class="key" data-key="76">
+                    <kbd>L</kbd>
+                    <span class="sound">tink</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio data-key="65" src="./sounds/808clp.wav"></audio>
+    <audio data-key="83" src="./sounds/HiHat 04.wav-9240-Free-Loops.com.mp3"></audio>
+    <audio data-key="68" src="./sounds/Foot Stomp.wav-22455-Free-Loops.com.mp3"></audio>
+    <audio data-key="70" src="./sounds/27-open hi hat.wav"></audio>
+    <audio data-key="71" src="./sounds/sboom.wav"></audio>
+    <audio data-key="72" src="./sounds/sci_ride.wav"></audio>
+    <audio data-key="74" src="./sounds/4390.wav"></audio>
+    <audio data-key="75" src="./sounds/Tom Mid.mp3"></audio>
+    <audio data-key="76" src="./sounds/Crystal-01.wav"></audio>
+    <script>
+        function playSound(e){
+             // console.log(e);
+            // console.log(e.keyCode);
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            //const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            // console.log(audio);
+            // console.log(key);
+           
+            if (!audio) return; //stop the fuction
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add("playing");
+            // setTimeout(function(){
+
+            // },0.07);
+           // key.classList.remove("playing");
+        }
+        function removeTransition(e){
+              if(e.propertyName !=="transform") return; // skip it is not a transform
+               console.log(e.propertyName);
+               console.log(this);
+               this.classList.remove("playing");
+           }
+          
+           window.addEventListener('keydown',playSound);
+           const keys = document.querySelectorAll(".key");
+           keys.forEach(key=> key.addEventListener('transitionend',removeTransition));
+    </script>
+</body>
+
+</html>

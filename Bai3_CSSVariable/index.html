@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <h2>Update CSS Variables With <span class="hl">JS</span></h2>
+    <div class="controls">
+        <label for="spacing"></label>
+        <input type="range" id="spacing" name="spacing" min="10" max="200" value="100" data-sizing="px" data-name="spacing">
+
+        <label for="blur"></label>
+        <input type="range" id="blur" name="blur" min="0" max="25" value="10" data-sizing="px" data-name="blur">
+        <br>
+        <label for="base"></label>
+        <input type="color" id="base" name="base" value="#ffc600" data-name="color">
+
+    </div>
+    <br>
+    <img src="./anh-hoa-sen-dep.jpg" alt="error" width="1080px">
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+        console.log(inputs);
+        //addEventListner
+        //this.dataset
+        //this.value
+        function handleUpdate(){
+            console.log(this.dataset);
+            console.log(this.value);
+            const data = this.dataset.name;
+            if(data === "spacing")
+                document.documentElement.style.setProperty('--spacing',`${this.value}px`)
+             if(data ==="blur")
+             document.documentElement.style.setProperty('--blur',`${this.value}px`)
+             if(data ==="color")
+             document.documentElement.style.setProperty('--base',`${this.value}`)
+
+        }
+        inputs.forEach(input=> input.addEventListener("change",handleUpdate));
+    </script>
+</body>
+
+</html>l
